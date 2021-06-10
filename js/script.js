@@ -4,10 +4,12 @@ var userNum = [];
 var difficoltà = insertNumber("Scegli il livello di difficoltà tra 0 e 2");
 var maxRandom = 0;
 
+//Verifico che il valore inserito per la difficoltà sia nel range 0-2
 while(difficoltà>2||difficoltà<0){
   difficoltà = insertNumber("Verifica che il numero sia compreso tra 0 e 2");
 }
 
+//Con lo switch scelgo il valore massimo per la generazione dei numeri Random
 switch(difficoltà) {
   case 0:
     maxRandom = 100;
@@ -21,7 +23,7 @@ switch(difficoltà) {
   default:
 }
 
-console.log(maxRandom);
+// console.log(maxRandom);
 
 //Popolo un array con 16 elementi unici
 
@@ -31,7 +33,7 @@ while(lista16.length<16){
     lista16.push(randNum);
   }
 }
-console.log(lista16)
+// console.log(lista16)
 
 chance = maxRandom - 16;
 
@@ -54,6 +56,8 @@ while(userNum.length<chance){
 
 output.innerText += userNum.length;
 
+
+                            // FUNZIONI
 
 //Funzione che dato un messaggio in ingresso, restituisce il numero inserito dall'utente se e solo se è un numero, altrimenti ripete la richiesta
 function insertNumber(message){
