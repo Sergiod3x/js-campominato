@@ -1,34 +1,19 @@
 var output=document.getElementById("out");
 var lista16 = [];
 var userNum = [];
-var difficoltà = insertNumber("Scegli il livello di difficoltà tra 0 e 2");
-var maxRandom = 0;
+var difficoltà = insertMaxNumber("Scegli il livello di difficoltà tra 0 e 2", 2,0);
 var win = "Complimenti hai vinto! il tuo punteggio è di "
 
-//Verifico che il valore inserito per la difficoltà sia nel range 0-2
-while(difficoltà>2||difficoltà<0){
-  difficoltà = insertNumber("Verifica che il numero sia compreso tra 0 e 2");
-}
-
-//Con lo switch scelgo il valore massimo per la generazione dei numeri Random
-switch(difficoltà) {
-  case 0:
-    maxRandom = 100;
-    break;
-  case 1:
-    maxRandom = 80;
-    break;
-  case 2:
-    maxRandom = 50;
-    break;
-  default:
-}
+//Recupero il massimo numero di elementi in funxione del livello di difficoltà
+var maxRandom = difficult(difficoltà);
 
 console.log(maxRandom);
 
-//Popolo un array con 16 elementi unici
+var maxNumbers = insertMaxNumber("Quante mine vorresti che fossero generate?", (maxRandom-1), 1);
 
-while(lista16.length<16){
+//Popolo un array con 16/n elementi unici
+
+while(lista16.length < maxNumbers){
   var randNum = getRandomNumber(maxRandom);
   if(!(isInArray(lista16, randNum))){
     lista16.push(randNum);
@@ -36,13 +21,13 @@ while(lista16.length<16){
 }
 console.log(lista16)
 
-chance = maxRandom - 16;
+chance = maxRandom - maxNumbers;
 
 //inserisco n numeri, e verifico per ogni numero inserito se è presente nell'array
 //se è presente esco dal ciclo
 //è presente anche un controllo per impedire l'inserimento di due valori identici
 while(userNum.length<chance){
-  var insertNum = insertNumber("Inserisci il numero");
+  var insertNum = insertMaxNumber("Inserisci il numero", (maxRandom), 1);
   if(!(isInArray(userNum, insertNum))){
     if(!(isInArray(lista16, insertNum))){
       userNum.push(insertNum);
@@ -63,13 +48,15 @@ output.innerText += win + userNum.length + " punti.";
 
                             // FUNZIONI
 
+
+
 //Funzione che dato un messaggio in ingresso, restituisce il numero inserito dall'utente se e solo se è un numero, altrimenti ripete la richiesta
-function insertNumber(message){
-    var num = parseInt(prompt(message));
-    while(isNaN(num)){
-        var num = parseInt(prompt("Attenzione il valore deve essere numerico"));
-    }
-    return num;
+function insertMaxNumber(message, max , min){
+  var num = parseInt(prompt(message));
+  while(isNaN(num)|| num > max || num < min){
+      var num = parseInt(prompt("Attenzione il valore deve essere numerico e rientrare nel range "+ min+"-"+max));
+  }
+  return num;
 }
 
 //Funzione che dato in ingresso un array e un elemento, verifica se l'elelmento è presente all'interno dell'array
@@ -87,6 +74,44 @@ function getRandomNumber(max){
   return (Math.floor(Math.random() * (max ))+1);
 }
 
+function difficult(level){
+  switch(level) {
+    case 0:
+      return 100;
+      break;
+    case 1:
+      return 80;
+      break;
+    case 2:
+      return 50;
+      break;
+    default:
+  }
+}
 
 
 
+
+// //Funzione che dato un messaggio in ingresso, restituisce il numero inserito dall'utente se e solo se è un numero, altrimenti ripete la richiesta
+// function insertNumber(message){
+//   var num = parseInt(prompt(message));
+//   while(isNaN(num)){
+//       var num = parseInt(prompt("Attenzione il valore deve essere numerico"));
+//   }
+//   return num;
+// }
+
+
+// //Con lo switch scelgo il valore massimo per la generazione dei numeri Random
+// switch(difficoltà) {
+//   case 0:
+//     maxRandom = 100;
+//     break;
+//   case 1:
+//     maxRandom = 80;
+//     break;
+//   case 2:
+//     maxRandom = 50;
+//     break;
+//   default:
+// }
