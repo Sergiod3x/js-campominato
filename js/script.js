@@ -1,26 +1,25 @@
 var output=document.getElementById("out");
 var lista16 = [];
 var userNum = [];
+var win = "Complimenti hai vinto! il tuo punteggio è di ";
 var difficoltà = insertMaxNumber("Scegli il livello di difficoltà tra 0 e 2", 2,0);
-var win = "Complimenti hai vinto! il tuo punteggio è di "
 
-//Recupero il massimo numero di elementi in funxione del livello di difficoltà
+
+//Recupero il massimo numero di elementi in funzione del livello di difficoltà
 var maxRandom = difficult(difficoltà);
 
 console.log(maxRandom);
 
+//Numero massimo di mine generate dal pc
 var maxNumbers = insertMaxNumber("Quante mine vorresti che fossero generate?", (maxRandom-1), 1);
 
 //Popolo un array con 16/n elementi unici
 
-while(lista16.length < maxNumbers){
-  var randNum = getRandomNumber(maxRandom);
-  if(!(isInArray(lista16, randNum))){
-    lista16.push(randNum);
-  }
-}
+lista16 = randomList(maxRandom, maxNumbers);
+
 console.log(lista16)
 
+//Numero di possibilità di inserimento
 chance = maxRandom - maxNumbers;
 
 //inserisco n numeri, e verifico per ogni numero inserito se è presente nell'array
@@ -40,15 +39,13 @@ while(userNum.length<chance){
   }
 }
 
-
-
-
 output.innerText += win + userNum.length + " punti.";
 
 
+
+
+
                             // FUNZIONI
-
-
 
 //Funzione che dato un messaggio in ingresso, restituisce il numero inserito dall'utente se e solo se è un numero, altrimenti ripete la richiesta
 function insertMaxNumber(message, max , min){
@@ -74,6 +71,7 @@ function getRandomNumber(max){
   return (Math.floor(Math.random() * (max ))+1);
 }
 
+//Funzione che resistuisce un numero in funzione del livello di difficoltà 
 function difficult(level){
   switch(level) {
     case 0:
@@ -87,6 +85,19 @@ function difficult(level){
       break;
     default:
   }
+}
+
+
+//Popolo un array con n elementi unici
+function randomList(rangePop, n){
+  var lista =[];
+  while(lista.length < n){
+    var randNum = getRandomNumber(rangePop);
+    if(!(isInArray(lista, randNum))){
+      lista.push(randNum);
+    }
+  }
+  return lista;
 }
 
 
@@ -114,4 +125,12 @@ function difficult(level){
 //     maxRandom = 50;
 //     break;
 //   default:
+// }
+
+
+// while(lista16.length < maxNumbers){
+//   var randNum = getRandomNumber(maxRandom);
+//   if(!(isInArray(lista16, randNum))){
+//     lista16.push(randNum);
+//   }
 // }
