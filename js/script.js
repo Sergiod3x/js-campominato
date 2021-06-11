@@ -3,6 +3,7 @@ var lista16 = [];
 var userNum = [];
 var difficoltà = insertNumber("Scegli il livello di difficoltà tra 0 e 2");
 var maxRandom = 0;
+var win = "Complimenti hai vinto! il tuo punteggio è di "
 
 //Verifico che il valore inserito per la difficoltà sia nel range 0-2
 while(difficoltà>2||difficoltà<0){
@@ -23,7 +24,7 @@ switch(difficoltà) {
   default:
 }
 
-// console.log(maxRandom);
+console.log(maxRandom);
 
 //Popolo un array con 16 elementi unici
 
@@ -33,7 +34,7 @@ while(lista16.length<16){
     lista16.push(randNum);
   }
 }
-// console.log(lista16)
+console.log(lista16)
 
 chance = maxRandom - 16;
 
@@ -42,19 +43,22 @@ chance = maxRandom - 16;
 //è presente anche un controllo per impedire l'inserimento di due valori identici
 while(userNum.length<chance){
   var insertNum = insertNumber("Inserisci il numero");
-  if(!(isInArray(lista16, insertNum))){
-    if(!(isInArray(userNum, insertNum))){
+  if(!(isInArray(userNum, insertNum))){
+    if(!(isInArray(lista16, insertNum))){
       userNum.push(insertNum);
+    }else{
+      win = "!!!Purtroppo hai beccato una mina!!! Il tuo punteggio è di "
+      break;
     }
   }else{
-    break
+    alert("Non inserire due volte lo stesso numero");
   }
 }
 
 
 
 
-output.innerText += userNum.length;
+output.innerText += win + userNum.length + " punti.";
 
 
                             // FUNZIONI
