@@ -88,7 +88,7 @@ function difficult(level){
 }
 
 
-//Popolo un array con n elementi unici
+//Popolo un array con n elementi unici da uno a rangePop
 function randomList(rangePop, n){
   var lista =[];
   while(lista.length < n){
