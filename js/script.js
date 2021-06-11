@@ -47,7 +47,8 @@ output.innerText += win + userNum.length + " punti.";
 
                             // FUNZIONI
 
-//Funzione che dato un messaggio in ingresso, restituisce il numero inserito dall'utente se e solo se è un numero, altrimenti ripete la richiesta
+//Funzione che dato un messaggio in ingresso, restituisce il numero inserito dall'utente se e solo se è un numero, 
+//e se e solo se rientra nel range min max, altrimenti ripete la richiesta
 function insertMaxNumber(message, max , min){
   var num = parseInt(prompt(message));
   while(isNaN(num)|| num > max || num < min){
